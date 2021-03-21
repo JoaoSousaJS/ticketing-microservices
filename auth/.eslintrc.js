@@ -11,6 +11,14 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
+  },
   plugins: [
     '@typescript-eslint',
   ],
@@ -23,5 +31,6 @@ module.exports = {
     '@typescript-eslint/return-await': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'import/extensions': 'off',
   },
 };
