@@ -1,6 +1,6 @@
 Ticketing project for study purpose in microservices with docker, kubernetes and node. 
 
-Goals and expectetations: 
+Goals and expectations: 
 - A ticketing system with payments and concurrency.
 - Bad quality code.
 - Ugly UI.
