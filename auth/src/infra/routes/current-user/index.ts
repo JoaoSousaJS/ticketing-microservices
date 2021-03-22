@@ -3,4 +3,4 @@ import { getCurrentUser } from '../../../presentation/controllers/user/get-curre
 
 export const authRouter = express.Router();
 
-authRouter.get('/currentuser', getCurrentUser);
+authRouter.get('/api/users/currentuser', getCurrentUser);
