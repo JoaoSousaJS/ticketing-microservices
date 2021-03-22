@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCurrentUser } from '../../presentation/controllers/user/get-current-user';
+import { getCurrentUser } from '../../../presentation/controllers/user/get-current-user';
 
 export const authRouter = express.Router();
 
