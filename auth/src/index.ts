@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import { authRouter } from './infra/routes';
 import { errorHandler } from './main/middlewares/error-handler';
 import { NotFoundError } from './presentation/errors';
