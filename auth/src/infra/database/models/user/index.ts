@@ -1,14 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+
+interface UserAttrs extends Document{
+    email: string
+    password: string
+}
 
 const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model<UserAttrs>('User', userSchema);
