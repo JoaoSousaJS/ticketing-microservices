@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { User } from '../../../infra/database/models/user';
-import { RequestValidationError } from '../../errors';
+import { BadRequestError, RequestValidationError } from '../../errors';
 
 export const signUp = async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -15,8 +15,7 @@ export const signUp = async (req: Request, res: Response) => {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-        console.log('Email in use');
-        return res.send({});
+        throw new BadRequestError('Email in use');
     }
     const user = await User.create({
         email,
