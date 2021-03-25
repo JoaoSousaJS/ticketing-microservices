@@ -24,6 +24,7 @@ module.exports = {
     ],
     rules: {
         'no-console': 'off',
+        'consistent-return': 'off',
         'import/prefer-default-export': 'off',
         '@typescript-eslint/strict-boolean-expressions': 'off',
         '@typescript-eslint/consistent-type-definitions': 'off',
