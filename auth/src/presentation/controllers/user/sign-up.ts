@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
 import { User } from '../../../infra/database/models/user';
 import { BadRequestError, RequestValidationError } from '../../errors';
@@ -21,6 +22,14 @@ export const signUp = async (req: Request, res: Response) => {
         email,
         password,
     });
+    const userJwt = jwt.sign({
+        id: user.id,
+        email: user.email,
+    }, 'asdf');
+
+    req.session = {
+        jwt: userJwt,
+    };
 
     res.status(201).send(user);
 };
