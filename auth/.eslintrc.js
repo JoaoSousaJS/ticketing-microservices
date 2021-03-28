@@ -37,5 +37,6 @@ module.exports = {
         '@typescript-eslint/indent': ['error'],
         'no-param-reassign': ['error', { props: false }],
         'no-underscore-dangle': 'off',
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     },
 };
