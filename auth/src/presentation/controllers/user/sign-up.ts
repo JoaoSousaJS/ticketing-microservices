@@ -1,16 +1,9 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { validationResult } from 'express-validator';
 import { User } from '../../../infra/database/models/user';
-import { BadRequestError, RequestValidationError } from '../../errors';
+import { BadRequestError } from '../../errors';
 
 export const signUp = async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        throw new RequestValidationError(errors.array());
-    }
-
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
