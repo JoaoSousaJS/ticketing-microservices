@@ -10,10 +10,17 @@ describe('Sign Up Controller', () => {
     beforeEach(async () => clear());
     afterAll(async () => close());
 
-    test('should returns a 201 on successful signup', async () => {
+    it('should returns a 201 on successful signup', async () => {
         await agent.post('/api/users/signup').send({
             email: 'test@test23.com',
             password: '1234',
         }).expect(201);
+    }, 5000);
+
+    it('should returns a 400 with an invalid email', async () => {
+        await agent.post('/api/users/signup').send({
+            email: 'testtest23.com',
+            password: '1234',
+        }).expect(400);
     }, 5000);
 });
