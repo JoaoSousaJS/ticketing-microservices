@@ -23,4 +23,11 @@ describe('Sign Up Controller', () => {
             password: '1234',
         }).expect(400);
     }, 5000);
+
+    it('should returns a 400 with an invalid password', async () => {
+        await agent.post('/api/users/signup').send({
+            email: 'test@test23.com',
+            password: '123',
+        }).expect(400);
+    }, 5000);
 });
