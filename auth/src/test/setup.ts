@@ -1,30 +1,43 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
-let mongo: MongoMemoryServer;
+const mongoServer = new MongoMemoryServer();
 
-beforeAll(async () => {
-    mongo = new MongoMemoryServer();
-    const mongoUrl = await mongo.getUri();
+const opts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+};
 
-    await mongoose.connect(mongoUrl, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+// Provide connection to a new in-memory database server.
+export const connect = async () => {
+    // NOTE: before establishing a new connection close previous
+    await mongoose.disconnect();
+    process.env.JWT_KEY = 'asdf';
+
+    const mongoUri = await mongoServer.getUri();
+    await mongoose.connect(mongoUri, opts, (err) => {
+        if (err) {
+            console.error(err);
+        }
     });
-});
+};
 
-beforeEach(async () => {
-    const collections = await mongoose.connection.db.collections();
+// Remove and close the database and server.
+export const close = async () => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
+};
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const collection of collections) {
-        collection.deleteMany({});
+// Remove all data from collections
+export const clear = async () => {
+    const { collections } = mongoose.connection;
+
+    for (const key in collections) {
+        await collections[key].deleteMany({});
     }
-});
-
-afterAll(async () => {
-    await mongoose.connection.close();
-    await mongo.stop();
-});
+};
