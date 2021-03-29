@@ -46,4 +46,13 @@ describe('Sign Up Controller', () => {
             password: '12345',
         }).expect(400);
     });
+
+    it('should sets a cookie after successful signup', async () => {
+        const response = await agent.post('/api/users/signup').send({
+            email: 'test@test23.com',
+            password: '1234',
+        }).expect(201);
+
+        expect(response.get('Set-Cookie')).toBeDefined();
+    }, 5000);
 });
