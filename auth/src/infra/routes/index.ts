@@ -1,13 +1,13 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { currentUser, requireAuth, validateRequest } from '../../main/middlewares';
+import { currentUser, validateRequest } from '../../main/middlewares';
 import {
     getCurrentUser, signIn, signOut, signUp,
 } from '../../presentation/controllers/user';
 
 export const authRouter = express.Router();
 
-authRouter.get('/api/users/currentuser', currentUser, requireAuth, getCurrentUser);
+authRouter.get('/api/users/currentuser', currentUser, getCurrentUser);
 
 authRouter.post('/api/users/signin', [
     body('email').isEmail().withMessage('Email must be valid'),
