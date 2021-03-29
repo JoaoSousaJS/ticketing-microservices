@@ -30,4 +30,20 @@ describe('Sign Up Controller', () => {
             password: '123',
         }).expect(400);
     }, 5000);
+
+    it('should returns a 400 with missing email and password', async () => {
+        await agent.post('/api/users/signup').send({}).expect(400);
+    }, 5000);
+
+    it('should disallows duplicate emails', async () => {
+        await agent.post('/api/users/signup').send({
+            email: 'test@test.com',
+            password: '12345',
+        }).expect(201);
+
+        await agent.post('/api/users/signup').send({
+            email: 'test@test.com',
+            password: '12345',
+        }).expect(400);
+    });
 });
