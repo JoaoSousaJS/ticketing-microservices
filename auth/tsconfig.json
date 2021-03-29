@@ -1,4 +1,3 @@
-
 {
   "compilerOptions": {
     "outDir": "dist",
@@ -6,14 +5,10 @@
     "target": "es2019",
     "esModuleInterop": true,
     "sourceMap": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": ["jest"]
   
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
 }
