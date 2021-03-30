@@ -28,4 +28,18 @@ describe('Sign In Controller', () => {
             password: '1235',
         }).expect(400);
     });
+
+    it('should return with a cookie when given valid credentials', async () => {
+        await agent.post('/api/users/signup').send({
+            email: 'test@test23.com',
+            password: '1234',
+        }).expect(201);
+
+        const response = await agent.post('/api/users/signin').send({
+            email: 'test@test23.com',
+            password: '1234',
+        }).expect(200);
+
+        expect(response.get('Set-Cookie')).toBeDefined();
+    });
 });
