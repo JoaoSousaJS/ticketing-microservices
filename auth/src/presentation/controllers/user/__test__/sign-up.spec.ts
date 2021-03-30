@@ -15,25 +15,25 @@ describe('Sign Up Controller', () => {
             email: 'test@test23.com',
             password: '1234',
         }).expect(201);
-    }, 5000);
+    });
 
     it('should returns a 400 with an invalid email', async () => {
         await agent.post('/api/users/signup').send({
             email: 'testtest23.com',
             password: '1234',
         }).expect(400);
-    }, 5000);
+    });
 
     it('should returns a 400 with an invalid password', async () => {
         await agent.post('/api/users/signup').send({
             email: 'test@test23.com',
             password: '123',
         }).expect(400);
-    }, 5000);
+    });
 
     it('should returns a 400 with missing email and password', async () => {
         await agent.post('/api/users/signup').send({}).expect(400);
-    }, 5000);
+    });
 
     it('should disallows duplicate emails', async () => {
         await agent.post('/api/users/signup').send({
@@ -54,5 +54,5 @@ describe('Sign Up Controller', () => {
         }).expect(201);
 
         expect(response.get('Set-Cookie')).toBeDefined();
-    }, 5000);
+    });
 });
