@@ -1,4 +1,4 @@
-React and NextJS boilerplate with the following packages already configured
+Client service
 
 - React
 - TypeScript
@@ -6,5 +6,4 @@ React and NextJS boilerplate with the following packages already configured
 - Styled Components
 - Jest
 - React test library
-- Husky
 - Storybook
