@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Form from 'components/Form'
 import { useForm } from 'react-hook-form'
 
@@ -8,10 +9,16 @@ type FormData = {
 
 export default function Signup() {
   const { handleSubmit, register } = useForm<FormData>()
+
   const handleSignUp = handleSubmit(async ({ email, password }) => {
-    console.log(email)
-    console.log(password)
+    const response = await axios.post('/api/users/signup', {
+      email,
+      password
+    })
+
+    console.log(response.data)
   })
+
   return (
     <Form buttonText="Sign Up" onSubmit={handleSignUp} reference={register} />
   )
