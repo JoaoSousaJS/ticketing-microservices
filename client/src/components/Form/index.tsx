@@ -1,15 +1,22 @@
 import Button from 'components/Button'
 import Input from 'components/Input'
+import { FormEventHandler, RefObject } from 'react'
 import * as S from './styles'
 
 type FormProps = {
   buttonText: string
+  onSubmit?: FormEventHandler<HTMLFormElement> | undefined
+  reference?:
+    | ((instance: HTMLInputElement | null) => void)
+    | RefObject<HTMLInputElement>
+    | null
+    | undefined
 }
 
-const Form = ({ buttonText }: FormProps) => (
-  <S.Wrapper>
-    <Input label="Email" />
-    <Input label="Password" />
+const Form = ({ buttonText, onSubmit, reference }: FormProps) => (
+  <S.Wrapper onSubmit={onSubmit}>
+    <Input label="Email" reference={reference} name="email" />
+    <Input label="Password" reference={reference} name="password" />
     <Button size="medium">{buttonText}</Button>
   </S.Wrapper>
 )
