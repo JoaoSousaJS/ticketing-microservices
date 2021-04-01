@@ -15,8 +15,13 @@ type FormProps = {
 
 const Form = ({ buttonText, onSubmit, reference }: FormProps) => (
   <S.Wrapper onSubmit={onSubmit}>
-    <Input label="Email" reference={reference} name="email" />
-    <Input label="Password" reference={reference} name="password" />
+    <Input label="Email" reference={reference} name="email" type="text" />
+    <Input
+      label="Password"
+      reference={reference}
+      name="password"
+      type="password"
+    />
     <Button size="medium">{buttonText}</Button>
   </S.Wrapper>
 )
