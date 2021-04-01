@@ -1,10 +1,15 @@
-import React, { InputHTMLAttributes, useState } from 'react'
+import React, { InputHTMLAttributes, RefObject, useState } from 'react'
 import * as S from './styles'
 
 export type InputFieldProps = {
   onInput?: (value: string) => void
   label?: string
   initialValue?: string
+  reference?:
+    | ((instance: HTMLInputElement | null) => void)
+    | RefObject<HTMLInputElement>
+    | null
+    | undefined
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Input = ({
@@ -12,6 +17,7 @@ const Input = ({
   onInput,
   name,
   placeholder,
+  reference,
   initialValue = '',
   ...props
 }: InputFieldProps) => {
@@ -35,6 +41,7 @@ const Input = ({
             value={value}
             name={name}
             onChange={onChange}
+            ref={reference}
             {...(label ? { id: name } : {})}
             {...props}
           />
