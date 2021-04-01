@@ -27,7 +27,6 @@ const Form = ({ buttonText, onSubmit, reference, errors }: FormProps) => {
         name="password"
         type="password"
       />
-
       {errors.length >= 1 && (
         <S.MessageContainer>
           <S.MessageHeading>Ooooops...</S.MessageHeading>
