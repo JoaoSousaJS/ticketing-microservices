@@ -11,9 +11,12 @@ type FormProps = {
     | RefObject<HTMLInputElement>
     | null
     | undefined
+  errors: {
+    message: string
+  }[]
 }
 
-const Form = ({ buttonText, onSubmit, reference }: FormProps) => (
+const Form = ({ buttonText, onSubmit, reference, errors }: FormProps) => (
   <S.Wrapper onSubmit={onSubmit}>
     <Input label="Email" reference={reference} name="email" type="text" />
     <Input
@@ -22,6 +25,7 @@ const Form = ({ buttonText, onSubmit, reference }: FormProps) => (
       name="password"
       type="password"
     />
+    {errors && errors.map((err) => err.message)}
     <Button size="medium">{buttonText}</Button>
   </S.Wrapper>
 )
