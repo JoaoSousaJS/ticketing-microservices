@@ -32,21 +32,19 @@ const Input = ({
 
   return (
     <S.Wrapper>
-      <S.Form>
-        {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
-        <S.InputWrapper>
-          <S.Input
-            placeholder={placeholder}
-            type="text"
-            value={value}
-            name={name}
-            onChange={onChange}
-            ref={reference}
-            {...(label ? { id: name } : {})}
-            {...props}
-          />
-        </S.InputWrapper>
-      </S.Form>
+      {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
+      <S.InputWrapper>
+        <S.Input
+          placeholder={placeholder}
+          type="text"
+          value={value}
+          name={name}
+          onChange={onChange}
+          ref={reference}
+          {...(label ? { id: name } : {})}
+          {...props}
+        />
+      </S.InputWrapper>
     </S.Wrapper>
   )
 }
