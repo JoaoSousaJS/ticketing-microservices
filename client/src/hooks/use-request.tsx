@@ -10,15 +10,20 @@ type ErrorsProps = {
 type AxiosProps = {
   method: 'get' | 'post' | 'patch'
   url: string
+  onSuccess: () => Promise<boolean>
 }
 
-export default ({ url, method }: AxiosProps) => {
+export default ({ url, method, onSuccess }: AxiosProps) => {
   const [errors, setErrors] = useState<JSX.Element>()
 
   const doRequest = async (body: any) => {
     try {
       setErrors(undefined)
       const response = await axios[method](url, body)
+
+      if (onSuccess) {
+        onSuccess()
+      }
       return response.data
     } catch (error) {
       setErrors(
