@@ -10,14 +10,14 @@ type ErrorsProps = {
 type AxiosProps = {
   method: 'get' | 'post' | 'patch'
   url: string
-  body: string
 }
 
-export default ({ url, method, body }: AxiosProps) => {
+export default ({ url, method }: AxiosProps) => {
   const [errors, setErrors] = useState<JSX.Element>()
 
-  const doRequest = async () => {
+  const doRequest = async (body: any) => {
     try {
+      setErrors(undefined)
       const response = await axios[method](url, body)
       return response.data
     } catch (error) {
