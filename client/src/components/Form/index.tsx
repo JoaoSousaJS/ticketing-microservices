@@ -11,10 +11,7 @@ type FormProps = {
     | RefObject<HTMLInputElement>
     | null
     | undefined
-  errors: {
-    message: string
-    field: string
-  }[]
+  errors: JSX.Element | undefined
 }
 
 const Form = ({ buttonText, onSubmit, reference, errors }: FormProps) => {
@@ -27,16 +24,7 @@ const Form = ({ buttonText, onSubmit, reference, errors }: FormProps) => {
         name="password"
         type="password"
       />
-      {errors.length >= 1 && (
-        <S.MessageContainer>
-          <S.MessageHeading>Ooooops...</S.MessageHeading>
-          <S.MessageList>
-            {errors.map((err) => (
-              <S.MessageItem key={err.field}>{err.message}</S.MessageItem>
-            ))}
-          </S.MessageList>
-        </S.MessageContainer>
-      )}
+      {errors && errors}
 
       <Button size="medium">{buttonText}</Button>
     </S.Wrapper>
