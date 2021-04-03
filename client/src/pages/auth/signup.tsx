@@ -1,7 +1,7 @@
 import Form from 'components/Form'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import useRequest from '../../hooks/use-request'
+import { useRequest } from '../../hooks/use-request'
 
 type FormData = {
   email: string

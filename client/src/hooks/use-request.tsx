@@ -13,7 +13,7 @@ type AxiosProps = {
   onSuccess: () => Promise<boolean>
 }
 
-export default ({ url, method, onSuccess }: AxiosProps) => {
+export const useRequest = ({ url, method, onSuccess }: AxiosProps) => {
   const [errors, setErrors] = useState<JSX.Element>()
 
   const doRequest = async (body: any) => {
