@@ -11,8 +11,11 @@ type HomeProps = {
 }
 
 export default function Home(props: HomeProps) {
-  console.log(props)
-  return <Main />
+  return props.currentUser ? (
+    <h1>You are signed in</h1>
+  ) : (
+    <h1>You are not signed in</h1>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
