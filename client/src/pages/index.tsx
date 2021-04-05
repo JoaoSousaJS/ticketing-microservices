@@ -3,26 +3,25 @@ import { Main } from 'components/Main'
 import { GetServerSideProps } from 'next'
 
 type HomeProps = {
-  currentUser: {
-    id: string
-    email: string
-    iat: string
+  data: {
+    currentUser: {
+      id: string
+      email: string
+      iat: string
+    }
   }
 }
 
 export default function Home(props: HomeProps) {
-  console.log(props)
   return <Main />
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   if (typeof window === 'undefined') {
     const { data } = await axios.get(
       'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser',
       {
-        headers: {
-          Host: 'ticketing.dev'
-        }
+        headers: req.headers
       }
     )
 
