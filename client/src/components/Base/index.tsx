@@ -1,6 +1,9 @@
 import Button from 'components/Button'
 import * as S from './styles'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useRequest } from 'hooks/use-request'
+import { useEffect } from 'react'
 
 export type BaseProps = {
   currentUser?: {
@@ -11,34 +14,45 @@ export type BaseProps = {
   children?: React.ReactNode
 }
 
-const Base = ({ currentUser, children }: BaseProps) => (
-  <S.Wrapper>
-    <S.HeaderContainer>
-      <S.Title>
-        <Link href="/">Ticketing</Link>
-      </S.Title>
-      {!currentUser ? (
-        <>
+const Base = ({ currentUser, children }: BaseProps) => {
+  const router = useRouter()
+  const { doRequest } = useRequest({
+    url: '/api/users/signout',
+    method: 'post',
+    onSuccess: () => router.push('/')
+  })
+
+  const handleLogout = () => {
+    doRequest({})
+  }
+
+  return (
+    <S.Wrapper>
+      <S.HeaderContainer>
+        <S.Title>
+          <Link href="/">Ticketing</Link>
+        </S.Title>
+        {!currentUser ? (
+          <>
+            <S.ButtonContainer>
+              <Link href="/auth/signup">
+                <Button as="a">Sign Up</Button>
+              </Link>
+              <span> </span>
+              <Link href="/auth/signin">
+                <Button as="a">Sign In</Button>
+              </Link>
+            </S.ButtonContainer>
+          </>
+        ) : (
           <S.ButtonContainer>
-            <Link href="/auth/signup">
-              <Button as="a">Sign Up</Button>
-            </Link>
-            <span> </span>
-            <Link href="/auth/signin">
-              <Button as="a">Sign In</Button>
-            </Link>
+            <Button onClick={handleLogout}>Logout</Button>
           </S.ButtonContainer>
-        </>
-      ) : (
-        <S.ButtonContainer>
-          <Link href="/">
-            <Button as="a">Logout</Button>
-          </Link>
-        </S.ButtonContainer>
-      )}
-    </S.HeaderContainer>
-    {children}
-  </S.Wrapper>
-)
+        )}
+      </S.HeaderContainer>
+      {children}
+    </S.Wrapper>
+  )
+}
 
 export default Base
