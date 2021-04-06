@@ -1,5 +1,6 @@
 import Button from 'components/Button'
 import * as S from './styles'
+import Link from 'next/link'
 
 export type BaseProps = {
   currentUser?: {
@@ -13,13 +14,25 @@ export type BaseProps = {
 const Base = ({ currentUser, children }: BaseProps) => (
   <S.Wrapper>
     <S.HeaderContainer>
+      <S.Title>Ticketing</S.Title>
       {!currentUser ? (
         <>
-          <Button>Sign Up</Button>
-          <Button>Sign in</Button>
+          <S.ButtonContainer>
+            <Link href="signup">
+              <Button as="a">Sign Up</Button>
+            </Link>
+            <span> </span>
+            <Link href="signin">
+              <Button as="a">Sign In</Button>
+            </Link>
+          </S.ButtonContainer>
         </>
       ) : (
-        <Button>Logout</Button>
+        <S.ButtonContainer>
+          <Link href="/">
+            <Button as="a">Logout</Button>
+          </Link>
+        </S.ButtonContainer>
       )}
     </S.HeaderContainer>
     {children}
