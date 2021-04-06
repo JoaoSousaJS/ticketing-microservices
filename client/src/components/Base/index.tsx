@@ -3,7 +3,6 @@ import * as S from './styles'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useRequest } from 'hooks/use-request'
-import { useEffect } from 'react'
 
 export type BaseProps = {
   currentUser?: {
