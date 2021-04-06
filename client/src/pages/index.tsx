@@ -1,5 +1,5 @@
 import { buildClient } from 'api/build-client'
-import { Main } from 'components/Main'
+import Base from 'components/Base'
 import { GetServerSideProps } from 'next'
 
 type HomeProps = {
@@ -11,11 +11,7 @@ type HomeProps = {
 }
 
 export default function Home(props: HomeProps) {
-  return props.currentUser ? (
-    <h1>You are signed in</h1>
-  ) : (
-    <h1>You are not signed in</h1>
-  )
+  return <h1>hi</h1>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
