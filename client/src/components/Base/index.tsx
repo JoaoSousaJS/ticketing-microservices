@@ -14,15 +14,17 @@ export type BaseProps = {
 const Base = ({ currentUser, children }: BaseProps) => (
   <S.Wrapper>
     <S.HeaderContainer>
-      <S.Title>Ticketing</S.Title>
+      <S.Title>
+        <Link href="/">Ticketing</Link>
+      </S.Title>
       {!currentUser ? (
         <>
           <S.ButtonContainer>
-            <Link href="signup">
+            <Link href="/auth/signup">
               <Button as="a">Sign Up</Button>
             </Link>
             <span> </span>
-            <Link href="signin">
+            <Link href="/auth/signin">
               <Button as="a">Sign In</Button>
             </Link>
           </S.ButtonContainer>
