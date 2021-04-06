@@ -36,11 +36,11 @@ const Base = ({ currentUser, children }: BaseProps) => {
           <>
             <S.ButtonContainer>
               <Link href="/auth/signup">
-                <Button as="a">Sign Up</Button>
+                <Button>Sign Up</Button>
               </Link>
               <span> </span>
               <Link href="/auth/signin">
-                <Button as="a">Sign In</Button>
+                <Button>Sign In</Button>
               </Link>
             </S.ButtonContainer>
           </>
