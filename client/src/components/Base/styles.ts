@@ -1,6 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.lightBg};
+  `}
   height: 8rem;
 `
 
