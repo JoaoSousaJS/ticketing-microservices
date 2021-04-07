@@ -20,6 +20,7 @@ export const signUp = async (req: Request, res: Response) => {
         email: user.email,
     }, process.env.JWT_KEY);
 
+    // @ts-ignore
     req.session = {
         jwt: userJwt,
     };

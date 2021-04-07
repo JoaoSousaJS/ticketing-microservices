@@ -21,7 +21,7 @@ export const signIn = async (req: Request, res: Response) => {
         id: existingUser.id,
         email: existingUser.email,
     }, process.env.JWT_KEY);
-
+    // @ts-ignore
     req.session = {
         jwt: userJwt,
     };
