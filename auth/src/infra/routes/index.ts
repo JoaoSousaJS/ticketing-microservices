@@ -1,6 +1,6 @@
+import { currentUser, validateRequest } from '@htickets/common';
 import express from 'express';
 import { body } from 'express-validator';
-import { currentUser, validateRequest } from '../../main/middlewares';
 import {
     getCurrentUser, signIn, signOut, signUp,
 } from '../../presentation/controllers/user';

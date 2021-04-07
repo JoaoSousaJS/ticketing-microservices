@@ -1,7 +1,7 @@
+import { BadRequestError } from '@htickets/common';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '../../../infra/database/models/user';
-import { BadRequestError } from '../../errors';
 
 export const signUp = async (req: Request, res: Response) => {
     const { email, password } = req.body;
