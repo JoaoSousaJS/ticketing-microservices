@@ -2,7 +2,6 @@ import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@htickets/common';
-import { authRouter } from './infra/routes';
 
 export const app = express();
 
@@ -14,8 +13,6 @@ app.use(
         secure: process.env.NODE_ENV !== 'test',
     }),
 );
-
-app.use(authRouter);
 
 app.all('*', () => {
     throw new NotFoundError();
