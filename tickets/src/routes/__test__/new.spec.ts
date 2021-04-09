@@ -22,7 +22,7 @@ describe('New Ticket', () => {
     });
 
     it('should returns a status other than 401 if the user signed in', async () => {
-        const response = await agent.post('/api/tickets').send({
+        const response = await agent.post('/api/tickets').set('Cookie', global.signin()).send({
         });
 
         expect(response.status).not.toEqual(401);
