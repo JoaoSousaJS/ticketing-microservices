@@ -21,7 +21,7 @@ describe('New Ticket', () => {
         await agent.post('/api/tickets').send({}).expect(401);
     });
 
-    it('should returns a status other than 401 if the iser signed in', async () => {
+    it('should returns a status other than 401 if the user signed in', async () => {
         const response = await agent.post('/api/tickets').send({
         });
 
