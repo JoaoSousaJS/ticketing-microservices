@@ -21,6 +21,13 @@ describe('New Ticket', () => {
         await agent.post('/api/tickets').send({}).expect(401);
     });
 
+    it('should returns a status other than 401 if the iser signed in', async () => {
+        const response = await agent.post('/api/tickets').send({
+        });
+
+        expect(response.status).not.toEqual(401);
+    });
+
     it('should returns an error if an invalid title is provided', async () => {
     });
 
