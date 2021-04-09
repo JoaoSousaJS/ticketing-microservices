@@ -51,5 +51,10 @@ describe('New Ticket', () => {
     });
 
     it('should creates a ticket with valid inputs', async () => {
+        // add mongo
+        await agent.post('/api/tickets').set('Cookie', global.signin()).send({
+            title: 'test',
+            price: 10,
+        }).expect(201);
     });
 });
