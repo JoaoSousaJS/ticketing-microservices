@@ -40,6 +40,14 @@ describe('New Ticket', () => {
     });
 
     it('should returns an error if an invalid price is provided', async () => {
+        await agent.post('/api/tickets').set('Cookie', global.signin()).send({
+            title: 'test',
+            price: -10,
+        }).expect(400);
+
+        await agent.post('/api/tickets').set('Cookie', global.signin()).send({
+            title: 'test',
+        }).expect(400);
     });
 
     it('should creates a ticket with valid inputs', async () => {
