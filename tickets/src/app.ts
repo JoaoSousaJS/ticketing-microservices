@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-import { errorHandler, NotFoundError } from '@htickets/common';
+import { currentUser, errorHandler, NotFoundError } from '@htickets/common';
 import { router } from './routes/new';
 
 export const app = express();
@@ -14,6 +14,8 @@ app.use(
         secure: process.env.NODE_ENV !== 'test',
     }),
 );
+
+app.use(currentUser);
 
 app.use(router);
 
