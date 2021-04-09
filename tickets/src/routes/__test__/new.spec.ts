@@ -18,6 +18,7 @@ describe('New Ticket', () => {
     });
 
     it('should only be accessed if user is signed in', async () => {
+        await agent.post('/api/tickets').send({}).expect(401);
     });
 
     it('should returns an error if an invalid title is provided', async () => {
