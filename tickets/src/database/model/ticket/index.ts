@@ -1,4 +1,4 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
 interface TicketAttrs extends Document{
     title: string
@@ -6,7 +6,7 @@ interface TicketAttrs extends Document{
     userId: string
 }
 
-const ticketSchema = new mongoose.Schema({
+const ticketSchema: Schema = new Schema({
     title: {
         type: String,
         required: true,
