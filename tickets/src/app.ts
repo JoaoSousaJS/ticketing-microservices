@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { currentUser, errorHandler, NotFoundError } from '@htickets/common';
-import { router } from './routes/new';
+import { router } from './routes';
 
 export const app = express();
 
