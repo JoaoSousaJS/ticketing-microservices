@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import request from 'supertest';
 import { app } from '../../app';
+import { Ticket } from '../../database/model/ticket';
 import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
@@ -52,9 +53,19 @@ describe('New Ticket', () => {
 
     it('should creates a ticket with valid inputs', async () => {
         // add mongo
+        let tickets = await Ticket.find({});
+
+        expect(tickets.length).toEqual(0);
+
         await agent.post('/api/tickets').set('Cookie', global.signin()).send({
             title: 'test',
             price: 10,
         }).expect(201);
+
+        tickets = await Ticket.find({});
+
+        expect(tickets.length).toEqual(1);
+        expect(tickets[0].price).toEqual(10);
+        expect(tickets[0].title).toEqual('test');
     });
 });
