@@ -5,3 +5,9 @@ Goals and expectations:
 - Production level code.
 - Ugly UI.
 - A good understanding of microservices.
+
+Microservices created so far (all still underdevelopment):
+- Auth
+- Client
+- Common
+- Tickets
