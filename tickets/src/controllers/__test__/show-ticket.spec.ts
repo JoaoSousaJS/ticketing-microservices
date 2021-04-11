@@ -14,7 +14,7 @@ describe('Show Ticket', () => {
     const price = 20;
 
     it('should returns 404 if the ticket is not found', async () => {
-        await agent.get('/api/tickets/fakeId').send().expect(404);
+        await agent.get('/api/tickets/fakeId').set('Cookie', global.signin()).send().expect(404);
     });
 
     it('should returns the ticket if the ticket is found', async () => {
@@ -23,7 +23,7 @@ describe('Show Ticket', () => {
             price,
         }).expect(201);
 
-        const ticketresponse = await agent.get(`/api/tickets/${response.body.id}`).send().expect(200);
+        const ticketresponse = await agent.get(`/api/tickets/${response.body.id}`).set('Cookie', global.signin()).send().expect(200);
 
         expect(ticketresponse.body.title).toEqual(title);
         expect(ticketresponse.body.price).toEqual(price);
