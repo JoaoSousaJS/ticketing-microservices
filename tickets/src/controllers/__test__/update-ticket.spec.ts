@@ -28,7 +28,15 @@ describe('Show Ticket', () => {
     });
 
     it('should returns a 401 if the user does not own the ticket', async () => {
+        const response = await agent.post('/api/tickets').set('Cookie', global.signin()).send({
+            title: 'title',
+            price: 10,
+        });
 
+        await agent.put(`/api/tickets/${response.body.id}`).set('Cookie', global.signin()).send({
+            title: 'title2',
+            price: 11,
+        }).expect(401);
     });
 
     it('should returns a 400 if the user provides an invalid title or price', async () => {
