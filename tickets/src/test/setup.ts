@@ -56,7 +56,7 @@ export const clear = async () => {
 
 global.signin = () => {
     const payload = {
-        id: '1laksdkasldkas',
+        id: mongoose.Types.ObjectId().toHexString(),
         email: 'test@test.com',
     };
 
