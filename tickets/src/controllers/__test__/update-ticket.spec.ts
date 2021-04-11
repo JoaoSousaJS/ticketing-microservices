@@ -19,7 +19,7 @@ describe('Show Ticket', () => {
         }).expect(404);
     });
 
-    it('should returns a 401 if the user is not authenticated', async () => {
+    it('should return a 401 if the user is not authenticated', async () => {
         const id = mongoose.Types.ObjectId().toHexString();
         await agent.put(`/api/tickets/${id}`).send({
             title: 'title',
@@ -27,7 +27,7 @@ describe('Show Ticket', () => {
         }).expect(401);
     });
 
-    it('should returns a 401 if the user does not own the ticket', async () => {
+    it('should return a 401 if the user does not own the ticket', async () => {
         const response = await agent.post('/api/tickets').set('Cookie', global.signin()).send({
             title: 'title',
             price: 10,
@@ -39,11 +39,11 @@ describe('Show Ticket', () => {
         }).expect(401);
     });
 
-    it('should returns a 400 if the user provides an invalid title or price', async () => {
+    it('should return a 400 if the user provides an invalid title or price', async () => {
 
     });
 
-    it('should updates the ticket', async () => {
+    it('should update the ticket', async () => {
 
     });
 });
