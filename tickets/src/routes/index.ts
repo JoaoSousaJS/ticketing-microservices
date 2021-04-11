@@ -1,7 +1,7 @@
 import { requireAuth, validateRequest } from '@htickets/common';
 import express from 'express';
 import { body } from 'express-validator';
-import { newTicket } from '../controllers/tickets/new-ticket';
+import { newTicket, showTicket } from '../controllers/tickets';
 
 export const router = express.Router();
 
@@ -11,3 +11,5 @@ router.post('/api/tickets', requireAuth, [
         gt: 0,
     }).withMessage('Price is required'),
 ], validateRequest, newTicket);
+
+router.get('/api/tickets/:id', requireAuth, showTicket);
