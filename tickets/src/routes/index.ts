@@ -1,7 +1,9 @@
 import { requireAuth, validateRequest } from '@htickets/common';
 import express from 'express';
 import { body } from 'express-validator';
-import { newTicket, showAllTickets, showTicket } from '../controllers/tickets';
+import {
+    newTicket, showAllTickets, showTicket, updateTicket,
+} from '../controllers/tickets';
 
 export const router = express.Router();
 
@@ -15,3 +17,5 @@ router.post('/api/tickets', requireAuth, [
 router.get('/api/tickets/:id', requireAuth, showTicket);
 
 router.get('/api/tickets', showAllTickets);
+
+router.put('/api/tickets/:id', requireAuth, updateTicket);
