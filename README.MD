@@ -6,7 +6,7 @@ Goals and expectations:
 - Ugly UI.
 - A good understanding of microservices.
 
-Microservices created so far (all still underdevelopment):
+Microservices created so far (all still under development):
 - Auth
 - Client
 - Common
