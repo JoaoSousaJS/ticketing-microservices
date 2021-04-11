@@ -319,9 +319,9 @@
     strip-json-comments "^3.1.1"
 
 "@htickets/common@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@htickets/common/-/common-1.0.5.tgz#de4edf6297abf695ab185e4d6a5192bba2c792e1"
-  integrity sha512-yBondphecRtb6c+KKpxqJ22xGl+uAFjJb/W5qsYmISzj3uiKHb3Iuu8kno7skvCTcgHPSkYKT5IqIwAmThEjdw==
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@htickets/common/-/common-1.0.6.tgz#d775b7689c28dbac7424a9c0127c723342a28be9"
+  integrity sha512-VkDEMT3cRgomDo2lE1JcOMkw5balEoUbXutZzwAck4iD5qqLD/MxFIj1/mjnXzpBIGEnhtcHfDJUo0FCMpY8NQ==
   dependencies:
     "@types/express" "^4.17.11"
     "@types/jsonwebtoken" "^8.5.1"
