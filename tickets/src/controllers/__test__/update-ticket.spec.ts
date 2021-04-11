@@ -11,7 +11,7 @@ describe('Show Ticket', () => {
     beforeEach(async () => clear());
     afterAll(async () => close());
 
-    it('should returns a 404 if the provided id does not exist', async () => {
+    it('should return a 404 if the provided id does not exist', async () => {
         const id = mongoose.Types.ObjectId().toHexString();
         await agent.put(`/api/tickets/${id}`).set('Cookie', global.signin()).send({
             title: 'title',
@@ -20,7 +20,11 @@ describe('Show Ticket', () => {
     });
 
     it('should returns a 401 if the user is not authenticated', async () => {
-
+        const id = mongoose.Types.ObjectId().toHexString();
+        await agent.put(`/api/tickets/${id}`).send({
+            title: 'title',
+            price: 10,
+        }).expect(401);
     });
 
     it('should returns a 401 if the user does not own the ticket', async () => {
