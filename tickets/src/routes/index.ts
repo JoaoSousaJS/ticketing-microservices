@@ -14,7 +14,7 @@ router.post('/api/tickets', requireAuth, [
     }).withMessage('Price is required'),
 ], validateRequest, newTicket);
 
-router.get('/api/tickets/:id', requireAuth, showTicket);
+router.get('/api/tickets/:id', showTicket);
 
 router.get('/api/tickets', showAllTickets);
 

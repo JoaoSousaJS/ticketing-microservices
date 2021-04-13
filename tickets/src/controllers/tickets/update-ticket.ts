@@ -13,5 +13,12 @@ export const updateTicket = async (req: Request, res: Response) => {
         throw new NotAuthorizedError();
     }
 
+    ticket.set({
+        title: req.body.title,
+        price: req.body.price,
+    });
+
+    await ticket.save();
+
     res.send(ticket);
 };

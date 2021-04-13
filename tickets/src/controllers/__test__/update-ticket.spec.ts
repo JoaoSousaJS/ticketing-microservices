@@ -58,6 +58,20 @@ describe('Show Ticket', () => {
     });
 
     it('should update the ticket', async () => {
+        const cookie = global.signin();
+        const response = await agent.post('/api/tickets').set('Cookie', cookie).send({
+            title: 'title',
+            price: 10,
+        });
 
+        await agent.put(`/api/tickets/${response.body.id}`).set('Cookie', cookie).send({
+            title: 'title2',
+            price: 10,
+        }).expect(200);
+
+        const ticketResponse = await agent.get(`/api/tickets/${response.body.id}`).send();
+
+        expect(ticketResponse.body.title).toEqual('title2');
+        expect(ticketResponse.body.price).toEqual(10);
     });
 });
