@@ -40,7 +40,21 @@ describe('Show Ticket', () => {
     });
 
     it('should return a 400 if the user provides an invalid title or price', async () => {
+        const cookie = global.signin();
+        const response = await agent.post('/api/tickets').set('Cookie', cookie).send({
+            title: 'title',
+            price: 10,
+        });
 
+        await agent.put(`/api/tickets/${response.body.id}`).set('Cookie', cookie).send({
+            title: '',
+            price: 10,
+        }).expect(400);
+
+        await agent.put(`/api/tickets/${response.body.id}`).set('Cookie', cookie).send({
+            title: 'teste',
+            price: -1,
+        }).expect(400);
     });
 
     it('should update the ticket', async () => {

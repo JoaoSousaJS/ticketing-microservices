@@ -18,4 +18,10 @@ router.get('/api/tickets/:id', requireAuth, showTicket);
 
 router.get('/api/tickets', showAllTickets);
 
-router.put('/api/tickets/:id', requireAuth, updateTicket);
+router.put('/api/tickets/:id', requireAuth,
+    [
+        body('title').notEmpty().withMessage('Title is required'),
+        body('price').notEmpty().isFloat({
+            gt: 0,
+        }).withMessage('Price is required'),
+    ], validateRequest, updateTicket);
