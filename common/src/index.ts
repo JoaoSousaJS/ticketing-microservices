@@ -8,3 +8,10 @@ export * from './middlewares/error-handler';
 export * from './middlewares/validate-request';
 export * from './middlewares/current-user';
 export * from './middlewares/require-auth';
+
+export * from './events/listener/base-listener'
+export * from './events/listener/subjects'
+export * from './events/listener/ticket-created-event'
+export * from './events/listener/ticket-updated-event'
+
+export * from './events/publisher/base-publisher'
