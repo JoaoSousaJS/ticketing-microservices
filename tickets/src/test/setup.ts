@@ -45,6 +45,7 @@ export const close = async () => {
 
 // Remove all data from collections
 export const clear = async () => {
+    jest.clearAllMocks();
     const { collections } = mongoose.connection;
 
     for (const key in collections) {

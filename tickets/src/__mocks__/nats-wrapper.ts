@@ -1,7 +1,10 @@
 export const natsWrapper = {
     client: {
-        publish: (subject:string, data: string, callback:() => void) => {
-            callback();
-        },
+        // eslint-disable-next-line no-undef
+        publish: jest.fn().mockImplementation(
+            (subject: string, data: string, callback: () => void) => {
+                callback();
+            },
+        ),
     },
 };

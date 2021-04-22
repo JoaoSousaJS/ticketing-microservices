@@ -2,6 +2,7 @@
 import request from 'supertest';
 import { app } from '../../app';
 import { Ticket } from '../../database/model/ticket';
+import { natsWrapper } from '../../nats-wrapper';
 import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
@@ -69,5 +70,14 @@ describe('New Ticket', () => {
         expect(tickets.length).toEqual(1);
         expect(tickets[0].price).toEqual(10);
         expect(tickets[0].title).toEqual('test');
+    });
+
+    it('should publish an event', async () => {
+        await agent.post('/api/tickets').set('Cookie', global.signin()).send({
+            title: 'test',
+            price: 10,
+        }).expect(201);
+
+        expect(natsWrapper.client.publish).toHaveBeenCalled();
     });
 });
