@@ -6,6 +6,8 @@ import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
 
+jest.mock('../../nats-wrapper');
+
 describe('New Ticket', () => {
     beforeAll(async () => connect());
     beforeEach(async () => clear());
