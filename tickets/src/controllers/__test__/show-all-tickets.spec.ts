@@ -5,6 +5,8 @@ import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
 
+jest.mock('../../nats-wrapper');
+
 const title = 'title';
 const price = 20;
 
