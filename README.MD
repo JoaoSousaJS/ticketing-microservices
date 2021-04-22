@@ -11,3 +11,4 @@ Microservices created so far (all still under development):
 - Client
 - Common
 - Tickets
+- Orders
