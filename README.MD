@@ -1,4 +1,4 @@
-Ticketing project for study purpose in microservices with docker, kubernetes, NATS Streaming Server and nNode. 
+Ticketing project for study purpose in microservices with docker, kubernetes, NATS Streaming Server and Node. 
 
 Goals and expectations: 
 - A ticketing system with payments and concurrency.
