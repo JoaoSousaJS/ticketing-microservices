@@ -1,11 +1,6 @@
 import mongoose, { Document, Model } from 'mongoose';
 
-interface TicketAttrs extends Document{
-    title: string
-    price: number
-}
-
-export interface TicketDoc extends Model<TicketAttrs> {
+export interface TicketAttrs extends Document{
     title: string
     price: number
 }
@@ -29,4 +24,4 @@ const ticketSchema = new mongoose.Schema({
     },
 });
 
-export const Ticket = mongoose.model<TicketAttrs, TicketDoc>('Ticket', ticketSchema);
+export const Ticket:Model<TicketAttrs> = mongoose.model('Ticket', ticketSchema);

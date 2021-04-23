@@ -1,19 +1,12 @@
 import { OrderStatus } from '@htickets/common';
 import mongoose, { Document, Model } from 'mongoose';
-import { TicketDoc } from '../tickets/tickets';
+import { TicketAttrs } from '../tickets/tickets';
 
 interface OrderAttrs extends Document {
     userId: string
     status: OrderStatus
     expiresAt: Date
-    ticket: TicketDoc
-}
-
-interface OrderDoc extends Model<OrderAttrs> {
-    userId: string
-    status: OrderStatus
-    expiresAt: Date
-    ticket: TicketDoc
+    ticket: TicketAttrs
 }
 
 const orderSchema = new mongoose.Schema({
@@ -43,4 +36,4 @@ const orderSchema = new mongoose.Schema({
     },
 });
 
-export const Order = mongoose.model<OrderAttrs, OrderDoc>('Order', orderSchema);
+export const Order:Model<OrderAttrs> = mongoose.model('Order', orderSchema);
