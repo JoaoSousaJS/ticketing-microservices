@@ -3,6 +3,7 @@ import mongoose, { Document, Model } from 'mongoose';
 export interface TicketAttrs extends Document{
     title: string
     price: number
+    isReserved(): Promise<boolean>
 }
 
 const ticketSchema = new mongoose.Schema({
