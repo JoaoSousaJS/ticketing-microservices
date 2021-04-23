@@ -1,6 +1,5 @@
-import { BadRequestError, NotFoundError, OrderStatus } from '@htickets/common';
+import { BadRequestError, NotFoundError } from '@htickets/common';
 import { Request, Response } from 'express';
-import { Order } from '../../models/orders/orders';
 import { Ticket } from '../../models/tickets/tickets';
 
 export const newOrder = async (req: Request, res: Response) => {
@@ -12,14 +11,9 @@ export const newOrder = async (req: Request, res: Response) => {
         throw new NotFoundError();
     }
 
-    const existingOrder = await Order.findOne({
-        ticket,
-        status: {
-            $in: [OrderStatus.Created, OrderStatus.AwaitingPament, OrderStatus.Complete],
-        },
-    });
+    const isReserved = await ticket.isReserved();
 
-    if (existingOrder) {
+    if (isReserved) {
         throw new BadRequestError('Thicket is already reserved');
     }
     res.send({});
