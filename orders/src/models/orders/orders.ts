@@ -1,5 +1,5 @@
 import { OrderStatus } from '@htickets/common';
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { TicketAttrs } from '../tickets/tickets';
 
 interface OrderAttrs extends Document {
@@ -36,4 +36,4 @@ const orderSchema = new mongoose.Schema({
     },
 });
 
-export const Order:Model<OrderAttrs> = mongoose.model('Order', orderSchema);
+export const Order = mongoose.model<OrderAttrs>('Order', orderSchema);
