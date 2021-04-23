@@ -1,4 +1,6 @@
+import { OrderStatus } from '@htickets/common';
 import mongoose, { Document, Model } from 'mongoose';
+import { Order } from '../orders/orders';
 
 export interface TicketAttrs extends Document{
     title: string
@@ -24,5 +26,16 @@ const ticketSchema = new mongoose.Schema({
         },
     },
 });
+
+ticketSchema.methods.isReserved = async function isReserved() {
+    const existingOrder = await Order.findOne({
+        ticket: this.id,
+        status: {
+            $in: [OrderStatus.Created, OrderStatus.AwaitingPament, OrderStatus.Complete],
+        },
+    });
+
+    return !!existingOrder;
+};
 
 export const Ticket:Model<TicketAttrs> = mongoose.model('Ticket', ticketSchema);
