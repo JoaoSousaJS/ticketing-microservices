@@ -317,7 +317,7 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@htickets/common@^1.0.6":
+"@htickets/common@^1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@htickets/common/-/common-1.0.8.tgz#227c9f3da94710b902783fe8af5418487d897593"
   integrity sha512-GI1KUPe49DtVEBIiVnADQAZNP8vaQeVTkazzId1ZBt4w+oO/3o3HMsg5JcwK0X03cDO+Atmhts4Q6Gca5NgMbw==
