@@ -13,4 +13,4 @@ router.post('/api/orders', requireAuth, validateRequest, [
 ], newOrder);
 router.get('/api/orders', requireAuth, getAllOrders);
 router.get('/api/orders/:orderId', requireAuth, getOrder);
-router.delete('/api/orders/:orderId', deleteOrder);
+router.delete('/api/orders/:orderId', requireAuth, deleteOrder);
