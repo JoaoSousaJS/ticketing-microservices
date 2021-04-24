@@ -9,7 +9,7 @@ const agent = request.agent(app);
 
 jest.mock('../../nats-wrapper');
 
-describe('New Order', () => {
+describe('Get Order', () => {
     beforeAll(async () => connect());
     beforeEach(async () => clear());
     afterAll(async () => close());
