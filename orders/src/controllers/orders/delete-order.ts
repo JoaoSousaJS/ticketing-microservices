@@ -1,6 +1,8 @@
 import { NotAuthorizedError, NotFoundError, OrderStatus } from '@htickets/common';
 import { Request, Response } from 'express';
+import { OrderCancelledPublisher } from '../../events/publishers/order-cancelled-publisher';
 import { Order } from '../../models/orders/orders';
+import { natsWrapper } from '../../nats-wrapper';
 
 export const deleteOrder = async (req: Request, res: Response) => {
     const { orderId } = req.params;
@@ -16,5 +18,12 @@ export const deleteOrder = async (req: Request, res: Response) => {
     order.status = OrderStatus.Cancelled;
 
     await order.save();
+
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+        id: order.id,
+        ticket: {
+            id: order.ticket.id,
+        },
+    });
     res.status(204).send(order);
 };
