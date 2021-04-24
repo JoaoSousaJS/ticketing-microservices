@@ -1,7 +1,9 @@
 import { BadRequestError, NotFoundError, OrderStatus } from '@htickets/common';
 import { Request, Response } from 'express';
+import { OrderCreatedPublisher } from '../../events/publishers/order-created-publisher';
 import { Order } from '../../models/orders/orders';
 import { Ticket } from '../../models/tickets/tickets';
+import { natsWrapper } from '../../nats-wrapper';
 
 const EXPIRATION_WINDOW_SECONDS = 15 * 60;
 
@@ -28,6 +30,17 @@ export const newOrder = async (req: Request, res: Response) => {
         status: OrderStatus.Created,
         expiresAt: expiration,
         ticket,
+    });
+
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+        id: order.id,
+        status: order.status,
+        userId: order.userId,
+        expiresAt: order.expiresAt.toISOString(),
+        ticket: {
+            id: ticket.id,
+            price: ticket.price,
+        },
     });
 
     res.status(201).send(order);
