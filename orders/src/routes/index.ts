@@ -8,9 +8,9 @@ import {
 
 export const router = express.Router();
 
-router.get('/api/orders', requireAuth, validateRequest, [
+router.post('/api/orders', requireAuth, validateRequest, [
     body('ticketId').notEmpty().custom((input:string) => mongoose.Types.ObjectId.isValid(input)).withMessage('TicketId must be provided'),
-], getAllOrders);
-router.post('/api/orders', newOrder);
+], newOrder);
+router.get('/api/orders', getAllOrders);
 router.get('/api/orders/:orderId', getOrder);
 router.delete('/api/orders/:orderId', deleteOrder);
