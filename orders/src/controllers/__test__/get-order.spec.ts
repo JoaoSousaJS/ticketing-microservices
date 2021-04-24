@@ -7,8 +7,6 @@ import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
 
-jest.mock('../../nats-wrapper');
-
 describe('Get Order', () => {
     beforeAll(async () => connect());
     beforeEach(async () => clear());
