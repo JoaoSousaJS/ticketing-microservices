@@ -43,6 +43,14 @@ describe('New Order', () => {
     });
 
     it('should reserve a ticket', async () => {
+        const ticket = await Ticket.create({
+            title: 'concert',
+            price: 20,
+        });
 
+        await agent.post('/api/orders').set('Cookie', global.signin())
+            .send({
+                ticketId: ticket.id,
+            }).expect(201);
     });
 });
