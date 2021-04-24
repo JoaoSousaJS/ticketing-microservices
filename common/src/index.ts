@@ -17,3 +17,6 @@ export * from './events/listener/ticket-updated-event'
 export * from './events/publisher/base-publisher'
 
 export * from './events/types/order-status'
+
+export * from './events/order/order-cancelled-event'
+export * from './events/order/order-created-event'
