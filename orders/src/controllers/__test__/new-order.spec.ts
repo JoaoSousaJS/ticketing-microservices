@@ -1,7 +1,10 @@
 /* eslint-disable no-undef */
+import { OrderStatus } from '@htickets/common';
 import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
+import { Order } from '../../models/orders/orders';
+import { Ticket } from '../../models/tickets/tickets';
 import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
@@ -22,7 +25,21 @@ describe('New Order', () => {
     });
 
     it('should return an error if the ticket is already reserved', async () => {
+        const ticket = await Ticket.create({
+            title: 'concert',
+            price: 20,
+        });
+        await Order.create({
+            ticket,
+            userId: 'asdasdas',
+            status: OrderStatus.Created,
+            expiresAt: new Date(),
+        });
 
+        await agent.post('/api/orders').set('Cookie', global.signin())
+            .send({
+                ticketId: ticket.id,
+            }).expect(400);
     });
 
     it('should reserve a ticket', async () => {
