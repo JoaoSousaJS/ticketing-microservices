@@ -23,7 +23,7 @@ export const newOrder = async (req: Request, res: Response) => {
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
-    const order = Order.create({
+    const order = await Order.create({
         userId: req.currentUser.id,
         status: OrderStatus.Created,
         expiresAt: expiration,
