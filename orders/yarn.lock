@@ -317,10 +317,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@htickets/common@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@htickets/common/-/common-1.0.8.tgz#227c9f3da94710b902783fe8af5418487d897593"
-  integrity sha512-GI1KUPe49DtVEBIiVnADQAZNP8vaQeVTkazzId1ZBt4w+oO/3o3HMsg5JcwK0X03cDO+Atmhts4Q6Gca5NgMbw==
+"@htickets/common@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@htickets/common/-/common-1.0.9.tgz#777fdd1c9a973f343475a1b9cc3eeac2ec7996d3"
+  integrity sha512-+ihWJRO/DzuZgtbymBr39JXGwgHXHS0EPlZDhDn/0qUcnRtMLASNxCnbvvDWBx7k1M3BfapLxPMRd8/QRo8ylg==
   dependencies:
     "@types/express" "^4.17.11"
     "@types/jsonwebtoken" "^8.5.1"
