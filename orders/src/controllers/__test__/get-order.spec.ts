@@ -30,4 +30,19 @@ describe('New Order', () => {
 
         expect(fetchedOrder.id).toEqual(order.id);
     });
+
+    it('should return an error if one user tries to fetch another users order', async () => {
+        const ticket = await Ticket.create({
+            title: 'concert',
+            price: 20,
+        });
+
+        const user = global.signin();
+
+        const { body: order } = await agent.post('/api/orders').set('Cookie', user).send({
+            ticketId: ticket.id,
+        }).expect(201);
+
+        await agent.get(`/api/orders/${order.id}`).set('Cookie', global.signin()).send().expect(401);
+    });
 });
