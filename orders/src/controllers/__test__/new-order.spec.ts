@@ -5,6 +5,7 @@ import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../models/orders/orders';
 import { Ticket } from '../../models/tickets/tickets';
+import { natsWrapper } from '../../nats-wrapper';
 import { clear, connect, close } from '../../test/setup';
 
 const agent = request.agent(app);
@@ -52,5 +53,19 @@ describe('New Order', () => {
             .send({
                 ticketId: ticket.id,
             }).expect(201);
+    });
+
+    it('should emits an order created event', async () => {
+        const ticket = await Ticket.create({
+            title: 'concert',
+            price: 20,
+        });
+
+        await agent.post('/api/orders').set('Cookie', global.signin())
+            .send({
+                ticketId: ticket.id,
+            }).expect(201);
+
+        expect(natsWrapper.client.publish).toHaveBeenCalled();
     });
 });
