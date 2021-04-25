@@ -40,3 +40,9 @@ ticketSchema.methods.isReserved = async function isReserved() {
 };
 
 export const Ticket:Model<TicketAttrs> = mongoose.model('Ticket', ticketSchema);
+
+ticketSchema.statics.create = (attrs: TicketAttrs) => new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price,
+});
