@@ -3,6 +3,7 @@ import mongoose, { Document, Model } from 'mongoose';
 import { Order } from '../orders/orders';
 
 export interface TicketAttrs extends Document{
+    id: string
     title: string
     price: number
     isReserved(): Promise<boolean>
