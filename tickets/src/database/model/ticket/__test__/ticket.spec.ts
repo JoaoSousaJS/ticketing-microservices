@@ -36,4 +36,19 @@ describe('Ticket Model', () => {
 
         throw new Error('Should not reach this point');
     });
+
+    it('should increment the version number on multiple saves', async () => {
+        const ticket = await Ticket.create({
+            title: 'concert',
+            price: 20,
+            userId: '123',
+        });
+
+        expect(ticket.version).toEqual(0);
+
+        await ticket.save();
+        expect(ticket.version).toEqual(1);
+        await ticket.save();
+        expect(ticket.version).toEqual(2);
+    });
 });
