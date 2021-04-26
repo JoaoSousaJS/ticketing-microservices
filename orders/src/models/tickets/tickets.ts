@@ -9,6 +9,12 @@ export interface TicketAttrs extends Document{
     price: number
     isReserved(): Promise<boolean>
     version: number
+
+}
+
+interface TicketModel extends Model<TicketAttrs> {
+    // eslint-disable-next-line no-unused-vars
+    findByEvent(event: {id: string, version: number}): Promise<TicketAttrs | null>
 }
 
 const ticketSchema = new mongoose.Schema({
@@ -32,6 +38,15 @@ const ticketSchema = new mongoose.Schema({
 ticketSchema.set('versionKey', 'version');
 ticketSchema.plugin(updateIfCurrentPlugin);
 
+ticketSchema.statics.findByEvent = async function
+findByEvent(event: {id: string, version: number}) {
+    // eslint-disable-next-line no-use-before-define
+    return Ticket.findOne({
+        _id: event.id,
+        version: event.version - 1,
+    });
+};
+
 ticketSchema.methods.isReserved = async function isReserved() {
     const existingOrder = await Order.findOne({
         ticket: this.id,
@@ -43,4 +58,4 @@ ticketSchema.methods.isReserved = async function isReserved() {
     return !!existingOrder;
 };
 
-export const Ticket:Model<TicketAttrs> = mongoose.model('Ticket', ticketSchema);
+export const Ticket = mongoose.model<TicketAttrs, TicketModel>('Ticket', ticketSchema);
