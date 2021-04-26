@@ -11,11 +11,13 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
     // eslint-disable-next-line class-methods-use-this
     async onMessage(data: TicketCreatedEvent['data'], msg: Message) {
         const { title, price } = data;
-        await Ticket.create({
+        const ticket = await Ticket.create({
             _id: data.id,
             title,
             price,
+            version: data.version,
         });
+        await ticket.save();
         msg.ack();
     }
 }
