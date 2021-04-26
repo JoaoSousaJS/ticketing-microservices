@@ -10,9 +10,9 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     // eslint-disable-next-line class-methods-use-this
     async onMessage(data: TicketUpdatedEvent['data'], msg:Message) {
-        const ticket = await Ticket.findOne({
-            _id: data.id,
-            version: data.version - 1,
+        const ticket = await Ticket.findByEvent({
+            id: data.id,
+            version: data.version,
         });
 
         if (!ticket) {
