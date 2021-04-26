@@ -1,5 +1,6 @@
 import { OrderStatus } from '@htickets/common';
 import mongoose, { Document, Model } from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { Order } from '../orders/orders';
 
 export interface TicketAttrs extends Document{
@@ -7,6 +8,7 @@ export interface TicketAttrs extends Document{
     title: string
     price: number
     isReserved(): Promise<boolean>
+    version: number
 }
 
 const ticketSchema = new mongoose.Schema({
@@ -27,6 +29,8 @@ const ticketSchema = new mongoose.Schema({
         },
     },
 });
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 ticketSchema.methods.isReserved = async function isReserved() {
     const existingOrder = await Order.findOne({
