@@ -68,4 +68,14 @@ describe('Order Created Listener', () => {
 
         expect(msg.ack).toHaveBeenCalled();
     });
+
+    it('should publish a ticket updated event', async () => {
+        const {
+            listener, data, msg,
+        } = await setup();
+
+        await listener.onMessage(data, msg);
+
+        expect(natsWrapper.client.publish).toHaveBeenCalled();
+    });
 });
