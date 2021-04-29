@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import { OrderStatus } from '@htickets/common';
+import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../models/orders/orders';
@@ -19,6 +20,7 @@ describe('Delete Order', () => {
 
     it('should mark an order as cancelled', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });
@@ -36,6 +38,7 @@ describe('Delete Order', () => {
 
     it('should mark an order as cancelled', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });

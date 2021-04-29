@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-
+import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 import { Ticket } from '../../models/tickets/tickets';
@@ -16,6 +16,7 @@ describe('Get Order', () => {
 
     it('should fetch the order', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });
@@ -33,6 +34,7 @@ describe('Get Order', () => {
 
     it('should return an error if one user tries to fetch another users order', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });

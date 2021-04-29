@@ -27,6 +27,7 @@ describe('New Order', () => {
 
     it('should return an error if the ticket is already reserved', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });
@@ -45,6 +46,7 @@ describe('New Order', () => {
 
     it('should reserve a ticket', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });
@@ -57,6 +59,7 @@ describe('New Order', () => {
 
     it('should emits an order created event', async () => {
         const ticket = await Ticket.create({
+            id: mongoose.Types.ObjectId().toHexString(),
             title: 'concert',
             price: 20,
         });

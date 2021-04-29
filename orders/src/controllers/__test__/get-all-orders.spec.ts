@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-
+import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 import { Ticket } from '../../models/tickets/tickets';
@@ -11,6 +11,7 @@ jest.mock('../../nats-wrapper');
 
 const buildTicket = async () => {
     const ticket = await Ticket.create({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: 'concert',
         price: 20,
     });
