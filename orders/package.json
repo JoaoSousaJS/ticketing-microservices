@@ -47,7 +47,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@htickets/common": "^1.0.10",
+    "@htickets/common": "^1.0.11",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
