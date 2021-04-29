@@ -8,6 +8,7 @@ interface OrderAttrs extends Document {
     status: OrderStatus
     expiresAt: Date
     ticket: TicketAttrs
+    version: number
 }
 
 const orderSchema = new mongoose.Schema({
