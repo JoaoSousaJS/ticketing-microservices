@@ -3,14 +3,10 @@
 import { TicketCreatedEvent } from '@htickets/common';
 import mongoose from 'mongoose';
 import { Message } from 'node-nats-streaming';
-import request from 'supertest';
-import { app } from '../../../app';
 import { Ticket } from '../../../models/tickets/tickets';
 import { natsWrapper } from '../../../nats-wrapper';
 import { clear, close, connect } from '../../../test/setup';
 import { TicketCreatedListener } from '../ticket-created-listener';
-
-const agent = request.agent(app);
 
 jest.mock('../../../nats-wrapper');
 
@@ -48,5 +44,13 @@ describe('Ticket Created listener', () => {
         expect(ticket).toBeDefined();
         expect(ticket.title).toEqual(data.title);
         expect(ticket.price).toEqual(data.price);
+    });
+
+    it('should ack the message ', async () => {
+        const { listener, data, msg } = await setup();
+
+        await listener.onMessage(data, msg);
+
+        expect(msg.ack).toHaveBeenCalled();
     });
 });
