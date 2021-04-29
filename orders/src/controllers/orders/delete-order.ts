@@ -19,8 +19,10 @@ export const deleteOrder = async (req: Request, res: Response) => {
 
     await order.save();
 
+    // @ts-ignore
     new OrderCancelledPublisher(natsWrapper.client).publish({
         id: order.id,
+        version: order.version,
         ticket: {
             id: order.ticket.id,
         },
