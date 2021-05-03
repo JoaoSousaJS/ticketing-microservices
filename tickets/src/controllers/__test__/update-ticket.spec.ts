@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
+import { Ticket } from '../../database/model/ticket';
 import { natsWrapper } from '../../nats-wrapper';
 import { clear, connect, close } from '../../test/setup';
 
@@ -96,5 +97,25 @@ describe('Show Ticket', () => {
         expect(ticketResponse.body.price).toEqual(10);
 
         expect(natsWrapper.client.publish).toHaveBeenCalled();
+    });
+
+    it('should reject updates if the ticket is reserved', async () => {
+        const cookie = global.signin();
+
+        const response = await agent.post('/api/tickets').set('Cookie', cookie).send({
+            title: 'title',
+            price: 10,
+        });
+
+        const ticket = await Ticket.findById(response.body.id);
+        ticket.set({
+            orderId: mongoose.Types.ObjectId().toHexString(),
+        });
+        await ticket.save();
+
+        await agent.put(`/api/tickets/${response.body.id}`).set('Cookie', cookie).send({
+            title: 'title2',
+            price: 10,
+        }).expect(400);
     });
 });
