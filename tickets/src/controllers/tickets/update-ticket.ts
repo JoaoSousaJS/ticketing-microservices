@@ -1,4 +1,4 @@
-import { NotAuthorizedError, NotFoundError } from '@htickets/common';
+import { BadRequestError, NotAuthorizedError, NotFoundError } from '@htickets/common';
 import { Request, Response } from 'express';
 import { Ticket } from '../../database/model/ticket';
 import { TicketUpdatedPublisher } from '../../events/publishers/ticket-updated-publisher';
@@ -9,6 +9,10 @@ export const updateTicket = async (req: Request, res: Response) => {
 
     if (!ticket) {
         throw new NotFoundError();
+    }
+
+    if (ticket.orderId) {
+        throw new BadRequestError('Ticket already reserved');
     }
 
     if (req.currentUser.id !== ticket.userId) {
