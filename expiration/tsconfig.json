@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "rootDir": "src",
-    "types": ["jest"]
+    "types": ["jest", "node"]
   
   },
   "exclude": ["node_modules"],
