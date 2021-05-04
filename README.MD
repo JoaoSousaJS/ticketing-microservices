@@ -13,3 +13,4 @@ Microservices created so far (all still under development):
 - Tickets
 - Orders
 - Expiration
+- Payments
