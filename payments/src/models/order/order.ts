@@ -2,6 +2,7 @@ import { OrderStatus } from '@htickets/common';
 import {
     Document, model, Model, Schema,
 } from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface OrderAttrs {
     id: string
@@ -44,6 +45,9 @@ const orderSchema = new Schema<OrderDocument, OrderModel>({
         },
     },
 });
+
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 orderSchema.statics.build = (attrs: OrderAttrs) => new Order({
     _id: attrs.id,
