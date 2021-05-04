@@ -33,6 +33,7 @@ module.exports = {
         '@typescript-eslint/restrict-template-expressions': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         'import/extensions': 'off',
+        'no-use-before-define': 'off',
         indent: 'off',
         '@typescript-eslint/indent': ['error'],
         'no-param-reassign': ['error', { props: false }],
