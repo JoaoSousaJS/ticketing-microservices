@@ -47,4 +47,12 @@ describe('Order Created listener', () => {
 
         expect(order.price).toEqual(data.ticket.price);
     });
+
+    it('should ack the message', async () => {
+        const { listener, data, msg } = await setup();
+
+        await listener.onMessage(data, msg);
+
+        expect(msg.ack).toHaveBeenCalled();
+    });
 });
