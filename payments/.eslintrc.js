@@ -34,6 +34,7 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': 'off',
         'import/extensions': 'off',
         'no-use-before-define': 'off',
+        'class-methods-use-this': 'off',
         indent: 'off',
         '@typescript-eslint/indent': ['error'],
         'no-param-reassign': ['error', { props: false }],
