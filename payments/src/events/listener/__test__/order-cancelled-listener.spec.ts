@@ -57,4 +57,14 @@ describe('Order Cancelled listener', () => {
 
         expect(updatedOrder.status).toEqual(order.status);
     });
+
+    it('should ack the message', async () => {
+        const {
+            listener, data, msg,
+        } = await setup();
+
+        await listener.onMessage(data, msg);
+
+        expect(msg.ack).toHaveBeenCalled();
+    });
 });
