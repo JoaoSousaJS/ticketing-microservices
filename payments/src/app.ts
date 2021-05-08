@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { currentUser, errorHandler, NotFoundError } from '@htickets/common';
+import { router } from './routes';
 
 export const app = express();
 
@@ -16,6 +17,7 @@ app.use(
 
 app.use(currentUser);
 
+app.use(router);
 
 app.all('*', () => {
     throw new NotFoundError();

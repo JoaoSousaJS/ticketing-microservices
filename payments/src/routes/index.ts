@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 import { newPayment } from '../controllers';
 
-const router = Router();
+export const router = Router();
 
 router.post('/api/payments', requireAuth, [
     body('token').notEmpty(),
