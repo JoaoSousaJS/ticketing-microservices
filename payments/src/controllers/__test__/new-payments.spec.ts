@@ -39,4 +39,22 @@ describe('New Payment', () => {
             orderId: order.id,
         }).expect(401);
     });
+
+    it('should return 400 if order is cancelled', async () => {
+        const userId = mongoose.Types.ObjectId().toHexString();
+        const order = Order.build({
+            id: mongoose.Types.ObjectId().toHexString(),
+            userId,
+            version: 0,
+            price: 20,
+            status: OrderStatus.Cancelled,
+        });
+
+        await order.save();
+
+        await agent.post('/api/payments').set('Cookie', global.signin(userId)).send({
+            token: 'asdas',
+            orderId: order.id,
+        }).expect(400);
+    });
 });
