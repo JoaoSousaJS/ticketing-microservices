@@ -6,10 +6,11 @@ import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../models/order/order';
 import { clear, connect, close } from '../../test/setup';
+import { stripe } from '../../utils/stripe/stripe';
 
 const agent = request.agent(app);
 
-jest.mock('../../nats-wrapper');
+jest.mock('../../utils/stripe/stripe');
 
 describe('New Payment', () => {
     beforeAll(async () => connect());
@@ -56,5 +57,29 @@ describe('New Payment', () => {
             token: 'asdas',
             orderId: order.id,
         }).expect(400);
+    });
+
+    it('should return 201 with valid inputs', async () => {
+        const userId = mongoose.Types.ObjectId().toHexString();
+        const order = Order.build({
+            id: mongoose.Types.ObjectId().toHexString(),
+            userId,
+            version: 0,
+            price: 20,
+            status: OrderStatus.Created,
+        });
+
+        await order.save();
+
+        await agent.post('/api/payments').set('Cookie', global.signin(userId))
+            .send({
+                token: 'tok_visa',
+                orderId: order.id,
+            }).expect(201);
+
+        const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
+        expect(chargeOptions.source).toEqual('tok_visa');
+        expect(chargeOptions.amount).toEqual(20 * 100);
+        expect(chargeOptions.currency).toEqual('usd');
     });
 });

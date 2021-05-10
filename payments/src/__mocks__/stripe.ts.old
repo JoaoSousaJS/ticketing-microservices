@@ -1,6 +1,7 @@
-/* eslint-disable no-undef */
 export const stripe = {
     charges: {
+        // @ts-ignore
+        // eslint-disable-next-line no-undef
         create: jest.fn().mockResolvedValue({}),
     },
 };
