@@ -10,6 +10,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
 
     queueGroupName = queueGroupName
 
+    // eslint-disable-next-line class-methods-use-this
     async onMessage(data: PaymentCreatedEvent['data'], msg: Message) {
         const order = await Order.findById(data.orderId);
 
