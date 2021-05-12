@@ -29,6 +29,10 @@ export const newPayment = async (req: Request, res: Response) => {
         source: token,
     });
 
+    if (!charge) {
+        throw new BadRequestError('Something has happened');
+    }
+
     const payment = Payment.build({
         orderId,
         stripeId: charge.id,
