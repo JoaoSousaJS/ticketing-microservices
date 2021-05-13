@@ -1,5 +1,4 @@
 import { buildClient } from 'api/build-client'
-import Base from 'components/Base'
 import { GetServerSideProps } from 'next'
 
 type HomeProps = {

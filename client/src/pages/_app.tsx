@@ -22,7 +22,7 @@ const App = ({ Component, pageProps, currentUser }: AppProps) => {
         </Head>
         <Base currentUser={currentUser} />
         <GlobalStyles />
-        <Component {...pageProps} />
+        <Component currentUser={currentUser} {...pageProps} />
       </ThemeProvider>
     </>
   )
