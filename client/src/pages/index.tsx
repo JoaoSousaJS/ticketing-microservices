@@ -7,17 +7,29 @@ type HomeProps = {
     email: string
     iat: string
   }
+  data: {
+    title: string
+    price: number
+    userId: string
+    version: number
+    id: string
+  }[]
 }
 
 export default function Home(props: HomeProps) {
+  console.log(props.data)
   return <h1>hi</h1>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const client = buildClient(context)
-  const { data } = await client.get('/api/users/currentuser')
+  const { data } = await client.get('/api/tickets')
+
+  console.log(data)
 
   return {
-    props: data
+    props: {
+      data
+    }
   }
 }
