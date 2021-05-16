@@ -1,4 +1,5 @@
 import { buildClient } from 'api/build-client'
+import TicketList from 'components/TicketList'
 import { GetServerSideProps } from 'next'
 
 type HomeProps = {
@@ -18,7 +19,7 @@ type HomeProps = {
 
 export default function Home(props: HomeProps) {
   console.log(props.data)
-  return <h1>hi</h1>
+  return <TicketList data={props.data} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
