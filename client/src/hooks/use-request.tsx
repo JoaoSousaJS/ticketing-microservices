@@ -30,7 +30,7 @@ export const useRequest = ({ url, method, onSuccess }: AxiosProps) => {
         <S.MessageContainer>
           <S.MessageHeading>Ooooops...</S.MessageHeading>
           <S.MessageList>
-            {error.response.data.errors.map((err: ErrorsProps) => (
+            {error.response.data.errors?.map((err: ErrorsProps) => (
               <S.MessageItem key={err.field}>{err.message}</S.MessageItem>
             ))}
           </S.MessageList>
