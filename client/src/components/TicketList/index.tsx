@@ -22,8 +22,6 @@ export type TicketProps = {
 }
 
 const TicketList = ({ data }: TicketProps) => {
-  console.log('aqui')
-  console.log(data)
   return (
     <Container>
       {data.length >= 1 && (
@@ -53,7 +51,7 @@ const TicketList = ({ data }: TicketProps) => {
                 <Td>
                   <Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>
                     <Button colorScheme="blue" variant="outline">
-                      Details
+                      View
                     </Button>
                   </Link>
                 </Td>
