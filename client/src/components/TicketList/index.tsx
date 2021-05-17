@@ -1,4 +1,15 @@
-import * as S from './styles'
+import Link from 'next/link'
+import {
+  Container,
+  Table,
+  Th,
+  Thead,
+  Tr,
+  Tbody,
+  Td,
+  Text,
+  Button
+} from '@chakra-ui/react'
 
 export type TicketProps = {
   data: {
@@ -14,31 +25,44 @@ const TicketList = ({ data }: TicketProps) => {
   console.log('aqui')
   console.log(data)
   return (
-    <S.Wrapper>
+    <Container>
       {data.length >= 1 && (
-        <>
-          <S.Title>Tickets</S.Title>
-          <S.Table>
-            <S.Thead>
-              <S.Tr>
-                <S.Th>Title</S.Th>
-                <S.Th>Price</S.Th>
-              </S.Tr>
-            </S.Thead>
-            <S.Body>
-              {data.map((ticket) => (
-                <>
-                  <S.Tr key={ticket.id}>
-                    <S.Value>{ticket.title}</S.Value>
-                    <S.Value>{ticket.price}</S.Value>
-                  </S.Tr>
-                </>
-              ))}
-            </S.Body>
-          </S.Table>
-        </>
+        <Table variant="striped" size="lg" colorScheme="cyan" border="2px">
+          <Thead>
+            <Tr>
+              <Th>
+                <Text fontSize="4xl">Title</Text>
+              </Th>
+              <Th>
+                <Text fontSize="4xl">Price</Text>
+              </Th>
+              <Th>
+                <Text fontSize="4xl">Action</Text>
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {data.map((ticket) => (
+              <Tr key={ticket.id}>
+                <Td>
+                  <Text fontSize="2xl">{ticket.title}</Text>
+                </Td>
+                <Td isNumeric>
+                  <Text fontSize="2xl">{ticket.price}</Text>
+                </Td>
+                <Td>
+                  <Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>
+                    <Button colorScheme="blue" variant="outline">
+                      Details
+                    </Button>
+                  </Link>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
       )}
-    </S.Wrapper>
+    </Container>
   )
 }
 
