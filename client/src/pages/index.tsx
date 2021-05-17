@@ -18,15 +18,12 @@ type HomeProps = {
 }
 
 export default function Home(props: HomeProps) {
-  console.log(props.data)
   return <TicketList data={props.data} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const client = buildClient(context)
   const { data } = await client.get('/api/tickets')
-
-  console.log(data)
 
   return {
     props: {
