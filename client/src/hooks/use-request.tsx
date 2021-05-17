@@ -10,7 +10,7 @@ type ErrorsProps = {
 type AxiosProps = {
   method: 'get' | 'post' | 'patch'
   url: string
-  onSuccess: () => Promise<boolean>
+  onSuccess?: () => Promise<boolean>
 }
 
 export const useRequest = ({ url, method, onSuccess }: AxiosProps) => {
