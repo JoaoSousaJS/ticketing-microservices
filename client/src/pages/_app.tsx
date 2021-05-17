@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import { buildClient } from 'api/build-client'
 import Base from 'components/Base'
 import { AppContext, AppProps } from 'next/app'
@@ -9,21 +10,23 @@ import theme from 'styles/theme'
 const App = ({ Component, pageProps, currentUser }: AppProps) => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>Boiler Plate</title>
-          <link rel="shortcut icon" href="/img/icon-512.png" />
-          <link rel="apple-touch icon" href="/img/icon-512.png" />
-          <link rel="manifest" href="/manifest.json" />
-          <meta
-            name="description"
-            content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
-          />
-        </Head>
-        <Base currentUser={currentUser} />
-        <GlobalStyles />
-        <Component currentUser={currentUser} {...pageProps} />
-      </ThemeProvider>
+      <ChakraProvider>
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>Boiler Plate</title>
+            <link rel="shortcut icon" href="/img/icon-512.png" />
+            <link rel="apple-touch icon" href="/img/icon-512.png" />
+            <link rel="manifest" href="/manifest.json" />
+            <meta
+              name="description"
+              content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+            />
+          </Head>
+          <Base currentUser={currentUser} />
+          <GlobalStyles />
+          <Component currentUser={currentUser} {...pageProps} />
+        </ThemeProvider>
+      </ChakraProvider>
     </>
   )
 }
