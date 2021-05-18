@@ -6,7 +6,7 @@
   "author": "Joao Sousa",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --poll src/index.ts",
+    "start": "ts-node-dev --watch 'src' src/index.ts",
     "test": "jest --watchAll --no-cache"
   },
   "config": {
