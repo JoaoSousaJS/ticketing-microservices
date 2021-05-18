@@ -23,6 +23,8 @@
     "@chakra-ui/react": "^1.6.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.14.0",
     "axios": "^0.21.1",
     "framer-motion": "^4",
     "next": "10.1.1",
