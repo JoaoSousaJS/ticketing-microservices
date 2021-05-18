@@ -3,8 +3,9 @@ import { buildClient } from 'api/build-client'
 import Button from 'components/Button'
 import { useRequest } from 'hooks/use-request'
 import { GetServerSideProps } from 'next'
+import router from 'next/router'
 
-type TicketProps = {
+export type TicketProps = {
   id: string
   price: number
   title: string
@@ -23,11 +24,17 @@ const TicketShow = ({ price, title, id }: TicketProps) => {
         <Text fontSize="7xl">{title}</Text>
         <Text fontSize="2xl">Price: {price}</Text>
         <Button
-          onClick={async () =>
-            await doRequest({
+          onClick={async () => {
+            const response = await doRequest({
               ticketId: id
             })
-          }
+
+            console.log(response)
+
+            if (response?.id) {
+              router.push('/orders/[orderId]', `/orders/${response.id}`)
+            }
+          }}
         >
           Purchase
         </Button>
