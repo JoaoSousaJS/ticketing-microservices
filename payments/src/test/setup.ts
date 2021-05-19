@@ -29,6 +29,8 @@ export const connect = async () => {
     await mongoose.disconnect();
     process.env.JWT_KEY = 'asdf';
 
+    await mongoServer.start();
+
     const mongoUri = await mongoServer.getUri();
     await mongoose.connect(mongoUri, opts, (err) => {
         if (err) {
