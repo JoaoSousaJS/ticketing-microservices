@@ -1,11 +1,17 @@
 name: tests
 
-on:
-  pull_request
+on: [pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - cmd: cd auth && yarn install && yarn test:ci
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Install dependencies
+        run: yarn install
+      
+      - name: Test
+        run: yarn test:ci
+
