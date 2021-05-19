@@ -1,0 +1,24 @@
+name: tests-payments
+
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./payments
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Install dependencies
+        run: yarn install
+      
+      - name: install mongodb core
+        run: yarn --cwd packages/mongodb-memory-server-core
+      
+      - name: Test
+        run: sudo yarn test:ci
+
