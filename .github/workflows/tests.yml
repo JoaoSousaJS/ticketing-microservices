@@ -5,12 +5,12 @@ on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./auth
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
-      - name: cd auth
-      - cmd: cd auth
       
       - name: Install dependencies
         run: yarn install
