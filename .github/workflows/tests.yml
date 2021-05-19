@@ -16,5 +16,5 @@ jobs:
         run: yarn install
       
       - name: Test
-        run: yarn test:ci
+        run: sudo yarn test:ci
 
