@@ -29,8 +29,9 @@ export const connect = async () => {
     // NOTE: before establishing a new connection close previous
     await mongoose.disconnect();
     process.env.JWT_KEY = 'asdf';
+    await mongoServer.start();
 
-    const mongoUri = await mongoServer.getUri();
+    const mongoUri = mongoServer.getUri();
     await mongoose.connect(mongoUri, opts, (err) => {
         if (err) {
             console.error(err);

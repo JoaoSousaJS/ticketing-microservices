@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { app } from './app';
 
 const start = async () => {
-    console.log('starting up...');
     if (!process.env.JWT_KEY) {
         throw new Error('JWT_KEY not defined');
     }
@@ -15,7 +14,7 @@ const start = async () => {
         useUnifiedTopology: true,
         useCreateIndex: true,
     });
-    console.log('connected to mongodb');
+    console.log('connected to mongodb and NATS');
     app.listen(3000, () => {
         console.log('listening on port 3000!');
     });
