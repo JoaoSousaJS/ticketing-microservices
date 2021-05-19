@@ -9,7 +9,7 @@ import { natsWrapper } from '../nats-wrapper';
 import { stripe } from '../utils/stripe/stripe';
 
 export const newPayment = async (req: Request, res: Response) => {
-    const { token, orderId } = req.body;
+    const { orderId } = req.body;
 
     const order = await Order.findById(orderId);
 
@@ -25,10 +25,13 @@ export const newPayment = async (req: Request, res: Response) => {
         throw new BadRequestError('Can not pay for a cancelled order');
     }
 
-    const charge = await stripe.charges.create({
+    const charge = await stripe.paymentIntents.create({
         currency: 'usd',
         amount: order.price * 100,
-        source: token,
+        payment_method_types: ['card'],
+        metadata: {
+            order_id: order.id,
+        },
     });
 
     if (!charge) {
