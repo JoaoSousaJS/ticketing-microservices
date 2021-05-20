@@ -29,13 +29,13 @@ const TicketList = ({ data }: TicketProps) => {
           <Thead>
             <Tr>
               <Th>
-                <Text fontSize="4xl">Title</Text>
+                <Text fontSize="3xl">Title</Text>
               </Th>
               <Th>
-                <Text fontSize="4xl">Price</Text>
+                <Text fontSize="3xl">Price</Text>
               </Th>
               <Th>
-                <Text fontSize="4xl">Action</Text>
+                <Text fontSize="3xl">Action</Text>
               </Th>
             </Tr>
           </Thead>
