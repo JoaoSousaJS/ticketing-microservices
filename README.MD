@@ -6,11 +6,11 @@ Goals and expectations:
 - Ugly UI.
 - A good understanding of microservices.
 
-Microservices created so far (all still under development):
-- Auth
-- Client
-- Common
-- Tickets
-- Orders
-- Expiration
-- Payments
+Microservices:
+- Auth - Handle users creation and authentication.
+- Client - website to see and purchase tickets.
+- Common - Lib that will manage all common functions.
+- Tickets - Handle ticket management.
+- Orders - Handle order management.
+- Expiration - Control when the ticket will expire.
+- Payments - Handle ticket payments.
