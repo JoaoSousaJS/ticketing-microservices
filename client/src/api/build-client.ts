@@ -11,8 +11,7 @@ type AxiosRequestProps = {
 export const buildClient = ({ req }: AxiosRequestProps) => {
   if (typeof window === 'undefined') {
     return axios.create({
-      baseURL:
-        'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+      baseURL: 'www.ticket-app-prod.me',
       headers: req.headers
     })
   } else {
